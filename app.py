@@ -1,11 +1,8 @@
-from pathlib import Path
 import streamlit as st
 import pandas as pd
 import joblib
 
-BASE_DIR = Path(__file__).parent
-
-model = joblib.load(BASE_DIR / "model_terbaik.pkl")
+model = joblib.load("model/model_terbaik.pkl")
 
 # input user
 input_data = pd.DataFrame([{

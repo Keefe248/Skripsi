@@ -5,7 +5,7 @@ import joblib
 
 BASE_DIR = Path(__file__).parent
 
-model = joblib.load(BASE_DIR / "best_model_xgboost.pkl")
+model = joblib.load(BASE_DIR / "model_terbaik.pkl")
 
 # input user
 input_data = pd.DataFrame([{

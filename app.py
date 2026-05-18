@@ -1,14 +1,9 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from xgboost import XGBRegressor
 
-# load model JSON
-model = XGBRegressor()
-model.load_model("model/model_terbaik.json")
-
-# load fitur input
-fitur_input = joblib.load("model/fitur_input.pkl")
+# load model pipeline lengkap
+model = joblib.load("model/model_terbaik.pkl")
 
 st.title("Prediksi Biaya Medis")
 
@@ -25,7 +20,6 @@ region = st.selectbox(
 
 if st.button("Prediksi"):
 
-    # dataframe input
     input_data = pd.DataFrame([{
         "age": age,
         "sex": sex,
@@ -35,16 +29,7 @@ if st.button("Prediksi"):
         "region": region
     }])
 
-    # one hot encoding
-    input_data = pd.get_dummies(input_data)
-
-    # samakan kolom dengan training
-    input_data = input_data.reindex(
-        columns=fitur_input,
-        fill_value=0
-    )
-
-    # prediksi
+    # pipeline otomatis preprocessing sendiri
     prediction = model.predict(input_data)
 
     st.success(f"Prediksi biaya medis: ${prediction[0]:,.2f}")

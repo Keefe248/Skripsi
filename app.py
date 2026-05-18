@@ -1,8 +1,9 @@
 import joblib
 import pandas as pd
 
-# load model
-model = joblib.load("best_model_xgboost.pkl")
+BASE_DIR = Path(__file__).parent
+
+model = joblib.load(BASE_DIR / "best_model_xgboost.pkl")
 
 # input user
 input_data = pd.DataFrame([{
